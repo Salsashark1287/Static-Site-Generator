@@ -2,11 +2,11 @@ from textnode import TextNode, TextType, text_node_to_html_node
 import os
 import shutil
 from markdown_blocks import *
+import sys
+
 
 def main():
     basepath = sys.argv[0]
-    if basepath == "":
-        basepath = "/"
     static = "./static"
     public = "./public"
 
@@ -15,7 +15,7 @@ def main():
         shutil.rmtree(public)
     os.mkdir(public)
     static_to_public(public, static)
-    generate_pages_recursive(f"{basepath}content", f"{basepath}template.html", f"{basepath}public")
+    generate_pages_recursive("content", "template.html", "public")
 
 def static_to_public(public, static):
     contents = os.listdir(static)
@@ -34,7 +34,7 @@ def extract_title(markdown):
             return title[2:].strip()
     raise Exception
     
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath = "/"):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     markdown = open(from_path, "r")
     markdown_contents = markdown.read()
@@ -55,7 +55,7 @@ def generate_page(from_path, template_path, dest_path):
     markdown.close()
     template.close()
 
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath = "/"):
     from pathlib import Path
     contents = os.listdir(dir_path_content)
     for item in contents:
