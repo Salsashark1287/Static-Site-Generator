@@ -6,7 +6,9 @@ import sys
 
 
 def main():
-    basepath = sys.argv[0]
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
     static = "./static"
     public = "./docs"
 
@@ -15,7 +17,7 @@ def main():
         shutil.rmtree(public)
     os.mkdir(public)
     static_to_public(public, static)
-    generate_pages_recursive("content", "template.html", "docs")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 def static_to_public(public, static):
     contents = os.listdir(static)
