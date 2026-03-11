@@ -15,7 +15,7 @@ def main():
         shutil.rmtree(public)
     os.mkdir(public)
     static_to_public(public, static)
-    generate_pages_recursive("content", "template.html", "public")
+    generate_pages_recursive("content", "template.html", "docs")
 
 def static_to_public(public, static):
     contents = os.listdir(static)
