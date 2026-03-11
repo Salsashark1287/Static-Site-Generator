@@ -8,7 +8,7 @@ import sys
 def main():
     basepath = sys.argv[0]
     static = "./static"
-    public = "./public"
+    public = "./docs"
 
     print("Cleaning public dir....")
     if os.path.exists(public):
