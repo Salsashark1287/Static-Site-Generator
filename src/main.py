@@ -4,6 +4,9 @@ import shutil
 from markdown_blocks import *
 
 def main():
+    basepath = sys.argv[0]
+    if basepath == "":
+        basepath = "/"
     static = "./static"
     public = "./public"
 
@@ -12,7 +15,7 @@ def main():
         shutil.rmtree(public)
     os.mkdir(public)
     static_to_public(public, static)
-    generate_pages_recursive("content", "template.html", "public")
+    generate_pages_recursive(f"{basepath}content", f"{basepath}template.html", f"{basepath}public")
 
 def static_to_public(public, static):
     contents = os.listdir(static)
@@ -41,6 +44,8 @@ def generate_page(from_path, template_path, dest_path):
     title = extract_title(markdown_contents)
     template_contents = template_contents.replace("{{ Title }}", title)
     template_contents = template_contents.replace("{{ Content }}", html)
+    template_contents = template_contents.replace('href="/', f'href="{basepath}' )
+    template_contents = template_contents.replace('src="/', f'src="{basepath}')
     directory = os.path.dirname(dest_path)
     if directory != "":
         os.makedirs(directory, exist_ok=True)
