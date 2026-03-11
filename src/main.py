@@ -63,7 +63,7 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, bas
             if os.path.join(dir_path_content, item).endswith(".md"):
                 md = Path(os.path.join(dest_dir_path, item))
                 html = md.with_suffix(".html")
-                generate_page(os.path.join(dir_path_content, item), template_path, html)
+                generate_page(os.path.join(dir_path_content, item), template_path, html, basepath)
         else:
             os.mkdir(os.path.join(dest_dir_path, item))
             generate_pages_recursive(os.path.join(dir_path_content, item), template_path, os.path.join(dest_dir_path, item))
