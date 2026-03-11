@@ -37,6 +37,7 @@ def extract_title(markdown):
     raise Exception
     
 def generate_page(from_path, template_path, dest_path, basepath = "/"):
+    print(f"basepath:{basepath}")
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     markdown = open(from_path, "r")
     markdown_contents = markdown.read()
